@@ -22,3 +22,20 @@ nav{
 li:hover{
   color:red;
 }
+
+/* shopping item in shop page */
+
+.item{
+  display: inline-block;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+}
+
+.item img{
+  width: 50%;
+  height: 50%;
+}
