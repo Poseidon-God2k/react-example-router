@@ -1,0 +1,101 @@
+.App {
+  text-align: center;
+}
+
+/* navigation page */
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  color:white;
+  background: rgb(73, 79, 82);
+}
+
+.nav-links{
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+}
+
+li:hover{
+  color:red;
+}
+
+/* shopping item in shop page */
+
+.item{
+  margin: 10px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 300px;
+  height: 400px;
+}
+
+/*top item */
+.item .top-item{
+  color:rgb(92, 109, 107);
+  text-align: center;
+  text-decoration: none;
+  height: 20%;
+  width: 100%;
+}
+.item .middle-item {
+  width: 100%;
+  height: 60%;
+}
+
+.item .middle-item img {
+  width: 60%;
+  height: 100%;
+}
+
+.item .bottom-item{
+  height: 10%;
+  width: 100%;
+}
+.bottom-item p {
+  display: inline-flex;
+  width: 50%;
+}
+
+.item:hover{
+  border: 1px solid rgb(240, 101, 101);
+}
+.item button:hover{
+  background-color: rgba(62, 214, 138, 0.6);
+  color: rgb(88, 50, 156);
+  cursor: pointer;
+}
+
+/* Login page css  */
+.login label{
+  display: block;
+}
+.login input[type=text], input[type=password] {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.login button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 60%;
+}
+
+.login button:hover{
+  opacity: 0.8;
+  background-color: rgb(74, 219, 110);
+}
+
+
