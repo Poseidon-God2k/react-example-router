@@ -98,4 +98,30 @@ li:hover{
   background-color: rgb(74, 219, 110);
 }
 
+/* Register page */
+.register label{
+  display: block;
+}
+.register input[type=text], input[type=password] {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
+.register button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 60%;
+}
+
+.register button:hover{
+  opacity: 0.8;
+  background-color: rgb(74, 219, 110);
+}
