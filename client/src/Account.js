@@ -71,6 +71,7 @@ const Login = () =>{
               </div>
                 <button type="button" id="button" onClick={submitRequest}>Login</button>
             </div>
+            
             <div className="row">
               <Link to='/account/register' style={registerStyle}>Register</Link>    
             </div>

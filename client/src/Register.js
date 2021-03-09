@@ -28,16 +28,54 @@ function Register(){
         <div className="register">
           <div className="form">
             <h1>Register page</h1>
+            <div className="groupInput">
+              <div className="labelGroup inputRegister">
+              <label htmlFor="uname">What's your email?</label>
+              </div>
+              <input type="email"  id="email" name="email" placeholder="Enter your email." required className="input-type" onChange={(e)=>{
+                setUserName(e.target.value);
+              }}/>
+            </div>
             
-            <label htmlFor="uname">User name:</label>
-            <input type="text"  name="uname" onChange={(e)=>{
-              setUserName(e.target.value);
-            }}/>
-            <label htmlFor="pwd">Password :</label>
-            <input type="password" name="pwd" onChange={(e)=>{
-              setPassWord(e.target.value);
-            }}/>
+            <div className="groupInput">
+              <div className="labelGroup inputRegister">
+              <label htmlFor="password">Create a password</label>
+              </div>
+              <input type="password"  id="password" name="password" placeholder="Create a password." required className="input-type" onChange={(e)=>{
+                setUserName(e.target.value);
+              }}/>
+            </div>
             
+            <div className="groupInput">
+              <div className="labelGroup inputRegister">
+              <label htmlFor="displayname">What should we call you?</label>
+              </div>
+              <input type="text"  id="displayname" name="displayname" placeholder="Enter a profile name." required className="input-type" onChange={(e)=>{
+                setUserName(e.target.value);
+              }}/>
+            </div>
+            
+            <div className="groupInput">
+              <div className="labelGroup inputRegister">
+              <label htmlFor="birthday">What's your date of birth?</label>
+              </div>
+              <input type="date"  id="birthday" name="birthday" required className="input-type" onChange={(e)=>{
+                setUserName(e.target.value);
+              }}/>
+            </div>
+            
+            <div className="groupInput">
+              <div className="labelGroup inputRegister">
+              <label htmlFor="gender">What's your gender?</label>
+              </div>
+              <input type="radio" name="gender" id="gender" required="" value="male" aria-invalid="false" />
+              <span>Male</span>
+              <input type="radio" name="gender" id="gender" required="" value="female" aria-invalid="false" />
+              <span>Female</span>
+              <input type="radio" name="gender" id="gender" required="" value="neutral" aria-invalid="false" />
+              <span>Non-binary</span>
+            </div>
+
             <button type="button" id="button" onClick={submitRequest}>Register</button>
             <Link to='/account/login' style={registerStyle}>Login</Link>
           </div>
