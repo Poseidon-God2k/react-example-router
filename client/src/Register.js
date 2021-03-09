@@ -3,11 +3,16 @@ import './App.css';
 import {Link, Route,Switch} from 'react-router-dom';
 import Axios from "axios";
 
-
 function Register(){
     const [username , setUserName] = useState('');
     const [password, setPassWord] = useState('');
-  
+    const registerStyle ={
+      color:'blue',
+      textDecoration: 'none',
+      display:'block',
+      listStyleType: 'none'
+    }
+
     const submitRequest =()=>{
       console.log(username)
       console.log(password)
@@ -19,6 +24,7 @@ function Register(){
         })
     }
       return (
+        <div className="content">
         <div className="register">
           <div className="form">
             <h1>Register page</h1>
@@ -33,8 +39,9 @@ function Register(){
             }}/>
             
             <button type="button" id="button" onClick={submitRequest}>Register</button>
-            
+            <Link to='/account/login' style={registerStyle}>Login</Link>
           </div>
+        </div>
         </div>
       )
   }
