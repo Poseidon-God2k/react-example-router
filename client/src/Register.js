@@ -4,8 +4,11 @@ import {Link, Route,Switch} from 'react-router-dom';
 import Axios from "axios";
 
 function Register(){
-    const [username , setUserName] = useState('');
+    const [email , setEmail] = useState('');
     const [password, setPassWord] = useState('');
+    const [name, setUserName] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [gender, setGender] = useState('');
     const registerStyle ={
       color:'blue',
       textDecoration: 'none',
@@ -14,15 +17,20 @@ function Register(){
     }
 
     const submitRequest =()=>{
-      console.log(username)
-      console.log(password)
+
       Axios.post("http://localhost:8888/api/register", {
-        uname:username, 
-        pwd:password
-        }).then(()=>{
-          alert("Successful register");
+        email:email, 
+        pwd:password,
+        uname:name,
+        birthday:birthday,
+        gender:gender
+        }).then( res =>{
+          alert(res.data.message);
         })
-    }
+        .catch(error => {
+          console.log(error);
+        })
+      }
       return (
         <div className="content">
         <div className="register">
@@ -33,7 +41,7 @@ function Register(){
               <label htmlFor="uname">What's your email?</label>
               </div>
               <input type="email"  id="email" name="email" placeholder="Enter your email." required className="input-type" onChange={(e)=>{
-                setUserName(e.target.value);
+                setEmail(e.target.value);
               }}/>
             </div>
             
@@ -42,7 +50,7 @@ function Register(){
               <label htmlFor="password">Create a password</label>
               </div>
               <input type="password"  id="password" name="password" placeholder="Create a password." required className="input-type" onChange={(e)=>{
-                setUserName(e.target.value);
+                setPassWord(e.target.value);
               }}/>
             </div>
             
@@ -60,7 +68,7 @@ function Register(){
               <label htmlFor="birthday">What's your date of birth?</label>
               </div>
               <input type="date"  id="birthday" name="birthday" required className="input-type" onChange={(e)=>{
-                setUserName(e.target.value);
+                setBirthday(e.target.value);
               }}/>
             </div>
             
@@ -68,11 +76,17 @@ function Register(){
               <div className="labelGroup inputRegister">
               <label htmlFor="gender">What's your gender?</label>
               </div>
-              <input type="radio" name="gender" id="gender" required="" value="male" aria-invalid="false" />
+              <input type="radio" name="gender" id="gender" required="" value="male" aria-invalid="false" onChange={(e)=>{
+                setGender(e.target.value);
+              }}/>
               <span>Male</span>
-              <input type="radio" name="gender" id="gender" required="" value="female" aria-invalid="false" />
+              <input type="radio" name="gender" id="gender" required="" value="female" aria-invalid="false" onChange={(e)=>{
+                setGender(e.target.value);
+              }}/>
               <span>Female</span>
-              <input type="radio" name="gender" id="gender" required="" value="neutral" aria-invalid="false" />
+              <input type="radio" name="gender" id="gender" required="" value="neutral" aria-invalid="false" onChange={(e)=>{
+                setGender(e.target.value);
+              }}/>
               <span>Non-binary</span>
             </div>
 
