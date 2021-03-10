@@ -23,6 +23,31 @@ app.get('/', (req,res)=>{
 app.post("/api/login",(req, res)=>{
     const username = req.body.uname
     const password = req.body.pwd
+    Client.connect(url, (err, db)=>{
+        if (err) throw err;
+        var shopDb = db.db("Shop_react");
+        var query = {email: username , password: password}
+        shopDb.collection("account_db").findOne(query, (err,user)=>{
+            if (err){
+                throw Errow(err);
+            };
+            if(!user){
+                res.status(200).send({
+                    message: "Error login!!!"
+                })
+            }
+            else{
+                res.status(200).send({
+                    message: "Success login!!!!"
+                })
+            }
+            
+            console.log("query account: ",username);
+            db.close();
+        })
+    })
+    
+
 })
 
 
