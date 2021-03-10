@@ -41,8 +41,8 @@ const Login = () =>{
     Axios.post("http://localhost:8888/api/login", {
       uname:username, 
       pwd:password
-      }).then(()=>{
-        alert("Successful login");
+      }).then(res =>{
+        alert(res.data.message);
       })
   }
   return (
