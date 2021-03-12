@@ -1,32 +1,42 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const {MongoClient} = require('mongodb');
 
 
 
-
 var Client = require('mongodb').MongoClient;
+
 
 var url = "mongodb://localhost:27017/";
 
-app.use(cors())
+app.use(cors({ origin: "http://localhost:3000", 
+    credentials: true }));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
+app.use(cookieParser())
 
+
+  
 app.get('/', (req,res)=>{
-    res.send("Hello")
-})
+    
+    res.send(req.cookies);
+});
 
 
 app.post("/api/login",(req, res)=>{
+    
     const username = req.body.uname
     const password = req.body.pwd
+    res.cookie("abc","def")
+    console.log(req.cookies)
     Client.connect(url, (err, db)=>{
         if (err) throw err;
         var shopDb = db.db("Shop_react");
         var query = {email: username , password: password}
+        
         shopDb.collection("account_db").findOne(query, (err,user)=>{
             if (err){
                 throw Errow(err);
@@ -37,7 +47,9 @@ app.post("/api/login",(req, res)=>{
                 })
             }
             else{
-                res.status(200).send({
+                res.cookie(JSON.stringify(user.email), JSON.stringify(user._id))
+                res.status(200)
+                .send({
                     message: "Success login!!!!"
                 })
             }
@@ -49,7 +61,6 @@ app.post("/api/login",(req, res)=>{
     
 
 })
-
 
 app.post("/api/register",(req, res)=>{
     const email = req.body.email
