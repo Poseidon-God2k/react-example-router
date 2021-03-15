@@ -1,11 +1,10 @@
 import React,{useState, useEffect} from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
-
-
-
+const sessionLogin = Cookies.get("user_id")
 function Login() {
   const [username , setUserName] = useState('');
   const [password, setPassWord] = useState('');
@@ -15,18 +14,28 @@ function Login() {
     display:'block',
     listStyleType: 'none'
   }
+  if(sessionLogin){
+    return <Redirect to='/account'/>
+  }
+  function refreshPage() {
+    window.location.reload(false);
+  }
   const submitRequest =()=>{
     console.log(username)
     console.log(password)
+    
+
     Axios.defaults.withCredentials = true;
     Axios.post("http://localhost:8888/api/login",{
         uname:username, 
         pwd:password
       }).then(res =>{
         alert(res.data.message);
+        refreshPage();
       })
   }
   return (
+    
     <div className="content">
       <div className="login">
           <div className="form">
@@ -63,4 +72,8 @@ function Login() {
   );
 }
 
+//Check session in client side to redirect account page
+// function checkSession(){
+  
+// }
 export default Login;

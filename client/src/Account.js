@@ -1,12 +1,18 @@
 import React,{useState, useEffect} from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
+import Cookies from 'js-cookie';
 
+const sessionLogin = Cookies.get("user_id")
 
 function Account() {
-  
+  console.log(sessionLogin)
+  // if(!sessionLogin){
+  //   return <Redirect to='/account/login'/>
+  // }
+
     return (
       // <Router>
         <div className="App">
