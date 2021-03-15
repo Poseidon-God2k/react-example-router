@@ -30,7 +30,6 @@ app.post("/api/login",(req, res)=>{
     
     const username = req.body.uname
     const password = req.body.pwd
-    res.cookie("abc","def")
     console.log(req.cookies)
     Client.connect(url, (err, db)=>{
         if (err) throw err;
@@ -47,7 +46,11 @@ app.post("/api/login",(req, res)=>{
                 })
             }
             else{
-                res.cookie(JSON.stringify(user.email), JSON.stringify(user._id))
+                res.cookie("user_id", JSON.stringify(user._id),{
+                        // maxAge: 60 * 60 * 1000, // 1 hour
+                        // httpOnly: true,
+                        // secure: true
+                })
                 res.status(200)
                 .send({
                     message: "Success login!!!!"
