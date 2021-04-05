@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import './App.css';
+import '../App.css';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
 import Axios from "axios";
 import Cookies from 'js-cookie';

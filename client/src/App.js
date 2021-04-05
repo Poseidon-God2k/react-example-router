@@ -4,8 +4,7 @@ import Nav from './Nav';
 import Shop from './Shop';
 import About from './About';
 import ItemDetail from './ItemDetail';
-import Account from './Account';
-import Register from './Register'
+import Account from './Account/Account';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 

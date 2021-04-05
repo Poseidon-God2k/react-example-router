@@ -4,13 +4,35 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const {MongoClient} = require('mongodb');
-
+const crypto = require("crypto")
 
 
 var Client = require('mongodb').MongoClient;
 
 
 var url = "mongodb://localhost:27017/";
+
+
+const algorithm = 'aes-256-cbc';
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+function encrypt(text) {
+    let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
+}
+
+function decrypt(text) {
+    let iv = Buffer.from(text.iv, 'hex');
+    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    decipher.setAutoPadding(false);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
+}
 
 app.use(cors({ origin: "http://localhost:3000", 
     credentials: true }));
@@ -21,7 +43,6 @@ app.use(cookieParser())
 
   
 app.get('/', (req,res)=>{
-    
     res.send(req.cookies);
 });
 
@@ -30,17 +51,18 @@ app.post("/api/login",(req, res)=>{
     
     const username = req.body.uname
     const password = req.body.pwd
-    console.log(req.cookies)
+    
     Client.connect(url, (err, db)=>{
         if (err) throw err;
         var shopDb = db.db("Shop_react");
-        var query = {email: username , password: password}
-        
-        shopDb.collection("account_db").findOne(query, (err,user)=>{
+        var query = {email: username}
+        console.log(query.email)
+        shopDb.collection("account_db").findOne(query, (err, user)=>{
             if (err){
                 throw Errow(err);
             };
-            if(!user){
+            console.log(decrypt(user.password))
+            if(password == decrypt(user.password)){
                 res.status(200).send({
                     message: "Error login!!!"
                 })
@@ -67,7 +89,12 @@ app.post("/api/login",(req, res)=>{
 
 app.post("/api/register",(req, res)=>{
     const email = req.body.email
-    const password = req.body.pwd
+    const password = encrypt(req.body.pwd)
+    
+    console.log("encrypt pass", password)
+    console.log("decrypt pass " , decrypt(password))
+
+
     const uname = req.body.uname
     const birthday = req.body.birthday
     const gender = req.body.gender
