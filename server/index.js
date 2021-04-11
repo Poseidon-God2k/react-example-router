@@ -56,12 +56,10 @@ app.post("/api/login",(req, res)=>{
         if (err) throw err;
         var shopDb = db.db("Shop_react");
         var query = {email: username}
-        console.log(query.email)
         shopDb.collection("account_db").findOne(query, (err, user)=>{
             if (err){
                 throw Errow(err);
             };
-            console.log(decrypt(user.password))
             if(password == decrypt(user.password)){
                 res.status(200).send({
                     message: "Error login!!!"
@@ -78,7 +76,6 @@ app.post("/api/login",(req, res)=>{
                     message: "Success login!!!!"
                 })
             }
-            
             console.log("query account: ",username);
             db.close();
         })
