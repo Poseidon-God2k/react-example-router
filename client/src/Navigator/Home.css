@@ -859,6 +859,7 @@ a.showOnFocus:focus {
   -webkit-box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, 0.3);
           box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  border-radius: 5px;
 }
 @media (min-width: 768px) {
   .album-results .col-md-4:nth-child(4),
